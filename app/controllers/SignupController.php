@@ -17,6 +17,7 @@ class SignupController extends ControllerBase
         $request = new Request();
         $user = new Users();
         $form = new RegisterForm();
+        $email = new Mail();
 
         // cek data tipe post
         if (!$this->request->isPost()){

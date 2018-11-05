@@ -18,4 +18,10 @@ $loader->registerNamespaces(
     ]
     );
 
+$loader->registerDirs(
+    [
+        'Mail' => APP_PATH.'library/email/mail.php',
+    ]
+);
+
 $loader->register();
