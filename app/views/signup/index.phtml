@@ -1,0 +1,31 @@
+<h2> Create Sign Up Page</h2>
+
+<p><?php echo $this->flashSession->output() ?></p>
+
+<?php echo $this->tag->form("signup/register"); ?>
+
+<div class="form-group">
+    <label for="name">Name</label>
+    <?php echo $form->render('name'); ?>
+
+</div>
+
+<div class="form-group">
+    <label for="email">E-Mail</label>
+    <?= $form->render('email'); ?>
+</div>
+
+<div class="form-group">
+    <label for="password">Password</label>
+    <?= $form->render('password') ?>
+</div>
+
+<div class="form-group">
+    <label for="konfirm_password">Konfirmasi Password</label>
+    <?= $form->render('konfirm_password') ?>
+</div>
+
+<div class="form-group">
+    <?= $form->render('submit'); ?>
+</div>
+</form>
