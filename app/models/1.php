@@ -32,24 +32,6 @@ class Users extends \Phalcon\Mvc\Model
     protected $password;
 
     /**
-     *
-     * @var integer
-     */
-    protected $active;
-
-    /**
-     *
-     * @var string
-     */
-    protected $created;
-
-    /**
-     *
-     * @var string
-     */
-    protected $updated;
-
-    /**
      * Method to set the value of field id
      *
      * @param integer $id
@@ -101,42 +83,22 @@ class Users extends \Phalcon\Mvc\Model
         return $this;
     }
 
-    /**
-     * Method to set the value of field active
-     *
-     * @param integer $active
-     * @return $this
-     */
+
     public function setActive($active)
     {
         $this->active = $active;
-
         return $this;
     }
 
-    /**
-     * Method to set the value of field created
-     *
-     * @param string $created
-     * @return $this
-     */
     public function setCreated($created)
     {
         $this->created = $created;
-
         return $this;
     }
 
-    /**
-     * Method to set the value of field updated
-     *
-     * @param string $updated
-     * @return $this
-     */
     public function setUpdated($updated)
     {
         $this->updated = $updated;
-
         return $this;
     }
 
@@ -181,36 +143,6 @@ class Users extends \Phalcon\Mvc\Model
     }
 
     /**
-     * Returns the value of field active
-     *
-     * @return integer
-     */
-    public function getActive()
-    {
-        return $this->active;
-    }
-
-    /**
-     * Returns the value of field created
-     *
-     * @return string
-     */
-    public function getCreated()
-    {
-        return $this->created;
-    }
-
-    /**
-     * Returns the value of field updated
-     *
-     * @return string
-     */
-    public function getUpdated()
-    {
-        return $this->updated;
-    }
-
-    /**
      * Validations and business logic
      *
      * @return boolean
@@ -228,6 +160,7 @@ class Users extends \Phalcon\Mvc\Model
                 ]
             )
         );
+
         //cek email sudah ada atau belum
         $validator->add(
             'email',
@@ -238,8 +171,7 @@ class Users extends \Phalcon\Mvc\Model
                     'cancelOnFail' => true,
                 ]
             )
-        );
-
+                );
 
         return $this->validate($validator);
     }
@@ -285,17 +217,20 @@ class Users extends \Phalcon\Mvc\Model
         return parent::findFirst($parameters);
     }
 
-
+    /**
+     * Independent Column Mapping.
+     * Keys are the real names in the table and the values their names in the application
+     *
+     * @return array
+     */
     public function columnMap()
     {
         return [
             'id' => 'id',
             'name' => 'name',
             'email' => 'email',
-            'password' => 'password',
-            'active' => 'active',
-            'created' => 'created',
-            'updated' => 'updated'
+            'password' => 'password'
         ];
     }
+
 }

@@ -17,7 +17,7 @@ class SignupController extends ControllerBase
         $request = new Request();
         $user = new Users();
         $form = new RegisterForm();
-        $email = new Mail();
+//        $email = new Mail();
 
         // cek data tipe post
         if (!$this->request->isPost()){
@@ -45,8 +45,8 @@ class SignupController extends ControllerBase
                     return;
             }
         }
-
         $user->setPassword($this->security->hash($_POST['password']));
+        echo 'sdffds';
 
         if(!$user->save()){
             foreach ($user->getMessages() as $m){
@@ -59,41 +59,16 @@ class SignupController extends ControllerBase
             return;
         }
 
-        $this->flashSession->success('Registrasi Berhasil');
-        return $this->response->redirect('');
+//        $params = [
+//            'name' => $this->request->getPost('name'),
+//            'link' => "http://localhost/skyline"
+//        ];
+//
+//            //kirim email => signup tampilan pesan di templates
+//        $email->send($this->request->getPost('email', ['trim', 'email'], 'signup' , $params));
 
-//
-//        $name = $this->request->getPost('name', ['trim','string']);
-//        $email = $this->request->getPost('email', ['trim','email']);
-//
-//        // ubah kebentuk array array
-//        // print_r($this->request->getPost());
-//        // exit();
-//
-//         $succes= $user->save(
-//             [
-//                 "name" => $name,
-//                 "email" => $email
-//             ],
-//             [
-//                "name",
-//                "email",
-//            ]
-//             );
-//
-//        if($succes){
-//            $this->flashSession->success("Thank for registering!");
-//            return $this->response->redirect('signup');
-//
-//        } else {
-//            echo " Sorry, the following problems were generated: ";
-//
-//            $messages = $user->getMessages();
-//
-//            foreach ($messages as $message){
-//                echo $message->getMessage(), "<br/>";
-//            }
-//        }
+        $this->flashSession->success('Registrasi Berhasil');
+        return $this->response->redirect('signup');
 
         $this->view->disable();
     }

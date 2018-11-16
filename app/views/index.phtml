@@ -5,12 +5,36 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-        <title>Phalcon PHP Framework</title>
-        <link rel="stylesheet" href="<?php echo $this->url->get('css/bootstrap.min.css') ?>">
+        <?php
+            echo $this->tag->getTitle();
+            echo $this->tag->stylesheetLink('public/css/bootstrap.min.css');
+        ?>
+<!--        <link rel="stylesheet" href="--><?php //echo $this->url->get('css/bootstrap.min.css') ?><!--">-->
         <link rel="shortcut icon" type="image/x-icon" href="<?php echo $this->url->get('img/favicon.ico')?>"/>
     </head>
     <body>
-        <div class="container">
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-3">
+            <a class="navbar-brand" href="#">SkyLine</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"></button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <form class="form-inline my-2 my-lg-0">
+                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                        
+                    </ul>
+                    <?php
+                        echo $this->tag->linkTo([
+                                'user/login',
+                                '<i class="fa fa-sign-in" aria-hidden="true"></i> Login',
+                            "class" => "btn btn-light"
+                        ]);
+                        echo "$nbsp";
+                    ?>
+                </form>
+            </div>
+        </nav>
+        <div class="container ">
             <?php echo $this->getContent(); ?>
         </div>
         <!-- jQuery first, then Popper.js, and then Bootstrap's JavaScript -->
