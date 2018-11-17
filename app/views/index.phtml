@@ -20,16 +20,34 @@
 
             <div class="collapse navbar-collapse" id="navbarNav">
                 <form class="form-inline my-2 my-lg-0">
-                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <ul class="navbar-nav mr-auto mt-2 my-lg-0">
                         
                     </ul>
                     <?php
-                        echo $this->tag->linkTo([
+                        if ($this->session->has('login')){
+
+                            echo $this->tag->linkTo([
+                                'user/profile',
+                                '<i class="fa fa-user" aria-hidden="true"></i> Profile',
+                                "class" => "btn btn-light"
+                            ]);
+                            echo "&nbsp;";
+
+                            echo $this->tag->linkTo([
+                                'user/logout',
+                                '<i class="fa fa-sign-out" aria-hidden="true"></i> Logout',
+                                "class" => "btn btn-danger"
+                            ]);
+
+                        } else {
+                            echo $this->tag->linkTo([
                                 'user/login',
                                 '<i class="fa fa-sign-in" aria-hidden="true"></i> Login',
-                            "class" => "btn btn-light"
-                        ]);
-                        echo "$nbsp";
+                                "class" => "btn btn-light"
+                            ]);
+                            echo "&nbsp;";
+
+                        }
                     ?>
                 </form>
             </div>

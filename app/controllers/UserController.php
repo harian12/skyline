@@ -73,6 +73,7 @@ class UserController extends ControllerBase
         $email = $this->request->getPost('email');
         $password = $this->request->getPost('password');
 
+        //cek apakah email ada di DB
         $user = Users::findFirst([
             'email = :email:',
             'bind' => [
@@ -80,12 +81,23 @@ class UserController extends ControllerBase
             ]
         ]);
 
+        //cek akun aktif atau tidak
+        if ($user->active != 1) {
+            $this->flashSession->error('Akun Sedang Aktif');
+            return $this->response->redirect('user/login');
+        }
 
             if ($user) {
                 if ($this->security->checkHash($password, $user->password)) {
+                    //atur session
+                    $this->session->set('name', $user->name);
+                    $this->session->set('email', $user->email);
+                    $this->session->set('created', $user->created);
+                    $this->session->set('updated', $user->updated);
+                    $this->session->set('login', 1 );
 
                     $this->flashSession->success("Login Berhasil");
-                    return $this->response->redirect('user/login');
+                    return $this->response->redirect('user/profile');
                 }
             } else {
 
@@ -165,6 +177,18 @@ class UserController extends ControllerBase
         return $this->response->redirect('user/login');
 
         $this->view->disable();
+    }
+
+
+    public function profileAction()
+    {
+        $this->authorized();
+    }
+
+    public function logoutAction()
+    {
+        $this->session->destroy();
+        return $this->response->redirect('user/login');
     }
 
 }

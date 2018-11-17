@@ -8,7 +8,16 @@ class IndexController extends ControllerBase
 
     public function indexAction()
     {
-        $this->view->form = new LoginForm();
+    }
+
+    public function show404Action()
+    {
+
+    }
+
+    public function show503Action()
+    {
+
     }
 
 }

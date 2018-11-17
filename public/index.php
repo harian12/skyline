@@ -15,6 +15,7 @@ try {
      */
     $di = new FactoryDefault();
 
+
     $di->set(
         'flashSession',
         function () {
@@ -29,6 +30,52 @@ try {
                 return $flash; 
         }
     );
+
+    //start session
+    $di->setShared(
+        'session',
+        function (){
+            $session = new Session();
+            $session->start();
+            return $session;
+        }
+    );
+
+    //not found hal
+    $di->set('dispatcher', function () {
+
+        $eventsManager = new \Phalcon\Events\Manager();
+
+        $eventsManager->attach("dispatch:beforeException", function ($event, $dispatcher, $exception) {
+
+            //404
+            if ($exception instanceof \Phalcon\Mvc\Dispatcher\Exception) {
+                $dispatcher->forward(array(
+                    'controller' => 'index',
+                    'action' => 'show404'
+                ));
+                return false;
+            }
+
+            //handle other exception
+            $dispatcher->forward(array(
+               'controller' => 'index',
+                'action' => 'show503'
+            ));
+
+            return false;
+
+        });
+
+        $dispatcher = new Phalcon\Mvc\Dispatcher();
+
+        $dispatcher->setEventsManager($eventsManager);
+
+        return $dispatcher;
+
+    }, true);
+
+
     /**
      * Handle routes
      */

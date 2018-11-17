@@ -45,6 +45,7 @@ class SignupController extends ControllerBase
                     return;
             }
         }
+
         $user->setPassword($this->security->hash($_POST['password']));
         echo 'sdffds';
 
