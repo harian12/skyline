@@ -90,6 +90,7 @@ class UserController extends ControllerBase
             if ($user) {
                 if ($this->security->checkHash($password, $user->password)) {
                     //atur session
+                    $this->session->set('id', $user->id);
                     $this->session->set('name', $user->name);
                     $this->session->set('email', $user->email);
                     $this->session->set('created', $user->created);

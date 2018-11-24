@@ -7,10 +7,10 @@ cek.onclick = function () {
 
     if (cek.checked){
         inputpass.setAttribute('type', 'text');
-        label.textContent = 'Hide Password';
+        // label.textContent = 'Hide Password';
     } else {
         inputpass.setAttribute('type', 'password');
-        label.textContent = "Show Password";
+        // label.textContent = "Show Password";
     }
 
 }
